@@ -1,0 +1,588 @@
+#define Status Main.Status
+	if(SerialScreen.Date.EnableCar_flag==1)
+	{
+		if(Status==-2)
+		{
+	
+		}
+		if(Status==-1)
+		{
+
+	
+		}
+
+		if(Status==0)//出车
+		{
+			RaspberryPi.Date.Mod = '0';
+			CatMove(200,200);
+			Status=1;
+		}
+		else if(Status==1)//到二维码
+		{
+			if(CatEnd())
+			{
+				CatMove(350,0);
+				Status =2;
+			}
+		}
+		else if(Status==2)//到转盘
+		{
+			if(CatEnd())
+			{
+				if(SerialScreen.Date.SendTaskMassage_flag==1)
+				{
+					Car.Date.DistanceControl.SetDistanceSpeed=400;
+					CatMove(909,-30);
+					Status=3;
+				}
+			}
+		}
+		else  if(Status==3)
+		{
+			if(CatEnd())
+			{
+//				MyIMU.MyIMUDate.Enable=0;//失能陀螺仪
+				Car.Date.DistanceControl.SetDistanceSpeed=200;
+				RaspberryPi.Date.Mod = '1';//切换树莓派
+				CatMove(0,-100);
+				Status =4;
+				
+			}
+		}
+		else  if(Status==4)
+		{
+			if(CatEnd())
+			{
+//				//记录当前角度
+				Main.tempAngle = Car.Date.CarAngle;
+//				//小车转向换失能
+				Car.Date.EnableMotor =0;
+				if(Z(40))
+				{
+					if(ClawOpen())
+					{
+						if(Arm(0,200))
+						{
+							Status=5;
+						}
+					}
+				}
+			}
+
+		}
+		else if(Status==5)
+		{
+			static char tempStatus=0;
+			if(tempStatus==0)
+			{
+				if(ParsesColor)
+				{
+					tempStatus=1;
+				}
+			}
+			if(tempStatus==1)
+			{
+				if(MyGrabBlock_ControlGrabBlock(&TaskBlockItem[RaspberryPi.Date.TaskMassage.num]))
+				{
+					RaspberryPi.Date.TaskMassage.num=1;//识别下一个
+					tempStatus=0;
+					Status =6;
+				}
+			}
+
+
+
+		}
+		else  if(Status==6)
+		{
+			if(Z(40))
+			{
+				if(ClawOpen())
+				{
+					if(Arm(0,200))
+					{
+						Status=7;
+					}
+				}
+			}
+		}
+		
+		else if(Status ==7)
+		{
+			static char tempStatus=0;
+			if(tempStatus==0)
+			{
+				if(ParsesColor)
+				{
+					tempStatus=1;
+				}
+			}
+			if(tempStatus==1)
+			{
+				if(MyGrabBlock_ControlGrabBlock(&TaskBlockItem[RaspberryPi.Date.TaskMassage.num]))
+				{
+					RaspberryPi.Date.TaskMassage.num=2;//识别下一个
+					tempStatus=0;
+					Status =8;
+				}
+			}
+		}
+		else  if(Status==8)
+		{
+			if(Z(40))
+			{
+				if(ClawOpen())
+				{
+					if(Arm(0,200))
+					{
+						Status=9;
+					}
+				}
+			}
+		}
+		else if(Status ==9)
+		{
+			static char tempStatus=0;
+			if(tempStatus==0)
+			{
+				if(ParsesColor)
+				{
+					tempStatus=1;
+				}
+			}
+			if(tempStatus==1)
+			{
+				if(MyGrabBlock_ControlGrabBlock(&TaskBlockItem[RaspberryPi.Date.TaskMassage.num]))
+				{
+					RaspberryPi.Date.TaskMassage.num=3;//识别下一个
+					tempStatus=0;
+					Status =10;
+				}
+			}
+		}
+		else if(Status ==10)
+		{
+			//漂移
+			MyIMU.MyIMUDate.Full_YawAnglePY =MyIMU.MyIMUDate.Full_YawAnglePY -Car.Date.CarAngle + Main.tempAngle ;
+//			//小车使能
+			Car.Date.EnableMotor =1;
+			CatMove(-350,0);
+			Status = 11;
+		}
+		else if(Status==11)
+		{
+			if(CatEnd())
+			{
+				if(CatAngle(89))
+				{
+					Car.Date.DistanceControl.SetDistanceSpeed=400;
+					CatMove(1830,0);
+					Status=12;
+				}
+				
+			}
+		}
+		else if(Status==12)
+		{
+			if(CatEnd())
+			{
+				Car.Date.DistanceControl.SetDistanceSpeed=200;
+				if(CatAngle(180))
+				{
+					if(Arm(0,200))
+					{
+					Status=13;
+					}
+					
+				}
+				
+			}
+		}
+		else if(Status==13)
+		{
+			Car.Date.DistanceControl.Enable =0;
+			RaspberryPi.Date.Mod = '2';//切换树莓派模式
+			if(Z(-5))
+			{
+				if(MyRaspberryPi_carTraceBlock(&RaspberryPi.Date))//对准圆心
+				{
+					Car.Date.EnableMotor =0;
+//					Main.tempAngle = Car.Date.CarAngle;
+					RaspberryPi.Date.TaskMassage.num =3;
+					MyGrabBlock_getArmXY(TaskBlockItem);
+					RaspberryPi.Date.TaskMassage.num =4;
+					
+					Status = 14;
+				}
+			}
+			//
+		}
+		else if(Status==14)
+		{
+			//
+//			
+			//向左
+			if(Arm(-151,205))
+			{
+				RaspberryPi.Date.Block.x = 0;
+				RaspberryPi.Date.Block.y = 0;
+				Status =15;
+			}
+		}
+		else if(Status == 15)
+		{
+			static char temptime =0;
+			if(temptime<25)
+			{
+				temptime++;
+			}
+			else
+			{
+				if(MyRaspberryPi_ArmTraceBlock(&RaspberryPi.Date))
+				{
+					MyGrabBlock_getArmXY(TaskBlockItem);
+					
+					RaspberryPi.Date.TaskMassage.num= 5;
+					Status = 16;
+	//					Status =15;
+				}
+			}
+
+
+		}
+		
+		else if(Status == 16)
+		{
+
+			if(Arm(148,192))
+			{
+
+				Status =17;
+				RaspberryPi.Date.Block.x = 0;
+				RaspberryPi.Date.Block.y = 0;
+			}
+
+		}
+		else if(Status == 17)
+		{
+			
+			static char temptime =0;
+			if(temptime<25)
+			{
+				temptime++;
+			}
+			else
+			{
+				if(MyRaspberryPi_ArmTraceBlock(&RaspberryPi.Date))
+				{
+					MyGrabBlock_getArmXY(TaskBlockItem);
+					Status = 18;
+				}
+			}
+		}
+		else if(Status ==18)
+		{
+			if(MyGrabBlock_ControlPlaceBlock(&TaskBlockItem[3]))
+			{
+				Status = 19;
+			}
+		}
+		else if(Status ==19)
+		{
+			if(MyGrabBlock_ControlPlaceBlock(&TaskBlockItem[4]))
+			{
+				Status = 20;
+			}
+		}
+		else if(Status ==20)
+		{
+			if(MyGrabBlock_ControlPlaceBlock(&TaskBlockItem[5]))
+			{
+				Status = 21;
+			}
+		}
+
+		else if(Status ==21)
+		{
+			if(MyGrabBlock_ControlGrabBlock(&TaskBlockItem[6]))
+			{
+				Status = 22;
+			}
+		}
+		else if(Status ==22)
+		{
+			if(MyGrabBlock_ControlGrabBlock(&TaskBlockItem[7]))
+			{
+				Status = 23;
+			}
+		}
+		else if(Status ==23)
+		{
+			if(MyGrabBlock_ControlGrabBlock(&TaskBlockItem[8]))
+			{
+//				//漂移
+//				MyIMU.MyIMUDate.Full_YawAnglePY = -Car.Date.CarAngle + Main.tempAngle ;
+				//小车使能
+				Car.Date.EnableMotor =1;
+				Car.Date.DistanceControl.Enable =1;
+				Status = -55;
+				CatMove(0,70);
+				RaspberryPi.Date.Mod = '4';//切换树莓派模式
+			}
+		}
+		else if(Status==-55)
+		{
+			if(Arm(0,200))
+			{
+				
+				
+				if(RaspberryPi.Date.Block.color==4&&RaspberryPi.Date.LineAngle!=0)
+				{
+					MyIMU.MyIMUDate.Full_YawAnglePY =MyIMU.MyIMUDate.Full_YawAnglePY+ (RaspberryPi.Date.LineAngle - (180-Arm.Date.SingleArm[ArmB].Angle));//-MyIMU.MyIMUDate.PY
+					Status =24;
+				}
+			}
+			
+		}
+		
+		else if(Status==24)
+		{
+			Car.Date.DistanceControl.SetDistanceSpeed=400;
+			CatMove(-830,0);
+			Status = 25;
+		}
+		else if(Status==25)
+		{
+			if(CatEnd())
+			{
+				Car.Date.DistanceControl.SetDistanceSpeed=400;
+				if(CatAngle(90))
+				{
+					CatMove(-930,-50);
+					Status = 26;
+				}
+				
+			}
+		}
+		
+		else if(Status == 26)
+		{
+			if(CatEnd())
+			{
+				if(Arm(0,200))
+				{
+					Status =27;
+				}
+					
+			}
+		}
+//////////////////////////////////////////
+		else if(Status==27)
+		{
+			
+			Car.Date.DistanceControl.Enable =0;
+			if(Main.roundStatus==0)
+			{
+				RaspberryPi.Date.Mod = '2';//切换树莓派模式
+			}
+			else
+			{
+				RaspberryPi.Date.Mod = '1';
+			}
+			
+			if(Z(-3))
+			{
+				if(MyRaspberryPi_carTraceBlock(&RaspberryPi.Date))//对准圆心
+				{
+					Car.Date.EnableMotor =0;
+					Main.tempAngle = Car.Date.CarAngle;
+					RaspberryPi.Date.TaskMassage.num =3;
+					MyGrabBlock_getArmXY(TaskBlockItem);
+					RaspberryPi.Date.TaskMassage.num =4;
+					
+					Status = 28;
+				}
+			}
+			//
+		}
+		else if(Status==28)
+		{
+		
+			//向左
+			if(Arm(-151,205))
+			{
+				RaspberryPi.Date.Block.x = 0;
+				RaspberryPi.Date.Block.y = 0;
+				Status =29;
+			}
+		}
+		else if(Status == 29)
+		{
+			if(MyRaspberryPi_ArmTraceBlock(&RaspberryPi.Date))
+			{
+				MyGrabBlock_getArmXY(TaskBlockItem);
+				
+				RaspberryPi.Date.TaskMassage.num= 5;
+				Status = 30;
+//					Status =15;
+			}
+
+		}
+		
+		else if(Status == 30)
+		{
+
+			if(Arm(148,192))
+			{
+				Status =31;
+				RaspberryPi.Date.Block.x = 0;
+				RaspberryPi.Date.Block.y = 0;
+			}
+
+		}
+		else if(Status == 31)
+		{
+			if(MyRaspberryPi_ArmTraceBlock(&RaspberryPi.Date))
+			{
+				MyGrabBlock_getArmXY(TaskBlockItem);
+				TaskBlockItem[3].GrabBlockStatus=0;
+				TaskBlockItem[4].GrabBlockStatus=0;
+				TaskBlockItem[5].GrabBlockStatus=0;
+				if(Main.roundStatus==1)
+				{
+				TaskBlockItem[3].H4=15;
+				TaskBlockItem[4].H4=15;
+				TaskBlockItem[5].H4=15;
+				}
+				Status = 32;
+			}
+		}
+		else if(Status ==32)
+		{
+			if(MyGrabBlock_ControlPlaceBlock(&TaskBlockItem[3]))
+			{
+				Status = 33;
+			}
+		}
+		else if(Status ==33)
+		{
+			if(MyGrabBlock_ControlPlaceBlock(&TaskBlockItem[4]))
+			{
+				Status = 34;
+			}
+		}
+		else if(Status ==34)
+		{
+			if(MyGrabBlock_ControlPlaceBlock(&TaskBlockItem[5]))
+			{
+				Status = 35;
+			}
+		}
+		else if(Status ==35)
+		{
+			if(Z(40))
+			{
+				if(Arm(0,200))
+				{
+					Status=36;
+				}
+			}
+		}
+		else if(Status ==36)
+		{
+			Z(0);
+			Car.Date.DistanceControl.SetDistanceSpeed=200;
+				Car.Date.EnableMotor =1;
+				Car.Date.DistanceControl.Enable =1;
+				Status = 37;
+				CatMove(0,70);
+			RaspberryPi.Date.Mod = '4';//切换树莓派模式
+			ClawOpen();
+		}
+		else if(Status ==37)
+		{
+			if(Arm(0,200))
+			{
+				
+
+				if(RaspberryPi.Date.Block.color==4&&RaspberryPi.Date.LineAngle!=0)
+				{
+					MyIMU.MyIMUDate.Full_YawAnglePY =MyIMU.MyIMUDate.Full_YawAnglePY+ (RaspberryPi.Date.LineAngle - (180-Arm.Date.SingleArm[ArmB].Angle));//+7
+					Status =38;
+				}
+			}
+		}
+		else if(Status==38)
+		{
+			Car.Date.DistanceControl.SetDistanceSpeed=400;
+			CatMove(-830,0);
+			Status = 39;
+		}
+		else if(Status==39)
+		{
+			
+			if(CatEnd())
+			{
+				if(CatAngle(0))
+				{
+					CatMove(-470,0);
+					Status = 40;
+				}
+			}
+		}
+		else if(Status==40)
+		{
+			Car.Date.DistanceControl.SetDistanceSpeed=200;
+			if(CatEnd())
+			{
+				Status = 41;
+			}
+		}
+		else if(Status==41)
+		{
+			//调整任务
+			RaspberryPi.Date.TaskMassage.BlockColor[0]=RaspberryPi.Date.TaskMassage.BlockColor[3];
+			RaspberryPi.Date.TaskMassage.BlockColor[1]=RaspberryPi.Date.TaskMassage.BlockColor[4];
+			RaspberryPi.Date.TaskMassage.BlockColor[2]=RaspberryPi.Date.TaskMassage.BlockColor[5];
+			
+			for(int i =0;i<9;i++)
+			{
+				TaskBlockItem[i].GrabBlockStatus =0;
+			}
+			RaspberryPi.Date.TaskMassage.num = 0;
+			RaspberryPi.Date.ColorFlag =0;
+			RaspberryPi.Date.Mod = '1';//切换树莓派
+			CatMove(0,-120);
+			if(Main.roundStatus==1)
+			{
+				Status=42;
+			}
+			else
+			{
+				Status =4;
+			}
+			Main.roundStatus=1;
+			
+		}
+		else if(Status==42)
+		{
+			Car.Date.DistanceControl.SetDistanceSpeed=400;
+			CatMove(-1490,0);
+			Status=43;
+		}
+		else if(Status==43)
+		{
+			if(CatEnd())
+			{
+				Car.Date.DistanceControl.SetDistanceSpeed=200;
+				CatMove(0,-160);
+				Z(0);
+				Arm(0,80);
+				Status=44;
+			}
+		}
+		
+		
+	}
+
+}

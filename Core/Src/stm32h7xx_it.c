@@ -23,7 +23,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <string.h>
-#include "HWT101.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -58,10 +57,18 @@
 
 /* External variables --------------------------------------------------------*/
 extern DMA_HandleTypeDef hdma_adc1;
+extern FDCAN_HandleTypeDef hfdcan1;
+extern FDCAN_HandleTypeDef hfdcan2;
 extern TIM_HandleTypeDef htim6;
 extern TIM_HandleTypeDef htim7;
-extern DMA_HandleTypeDef hdma_usart1_rx;
-extern UART_HandleTypeDef huart1;
+extern DMA_HandleTypeDef hdma_uart7_rx;
+extern DMA_HandleTypeDef hdma_uart8_rx;
+extern DMA_HandleTypeDef hdma_uart9_rx;
+extern DMA_HandleTypeDef hdma_usart10_rx;
+extern UART_HandleTypeDef huart7;
+extern UART_HandleTypeDef huart8;
+extern UART_HandleTypeDef huart9;
+extern UART_HandleTypeDef huart10;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -219,6 +226,20 @@ void DMA1_Stream0_IRQHandler(void)
 }
 
 /**
+  * @brief This function handles DMA1 stream1 global interrupt.
+  */
+void DMA1_Stream1_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Stream1_IRQn 0 */
+
+  /* USER CODE END DMA1_Stream1_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_usart10_rx);
+  /* USER CODE BEGIN DMA1_Stream1_IRQn 1 */
+
+  /* USER CODE END DMA1_Stream1_IRQn 1 */
+}
+
+/**
   * @brief This function handles DMA1 stream2 global interrupt.
   */
 void DMA1_Stream2_IRQHandler(void)
@@ -226,39 +247,94 @@ void DMA1_Stream2_IRQHandler(void)
   /* USER CODE BEGIN DMA1_Stream2_IRQn 0 */
 
   /* USER CODE END DMA1_Stream2_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_usart1_rx);
+  HAL_DMA_IRQHandler(&hdma_uart9_rx);
   /* USER CODE BEGIN DMA1_Stream2_IRQn 1 */
 
   /* USER CODE END DMA1_Stream2_IRQn 1 */
 }
 
 /**
-  * @brief This function handles USART1 global interrupt.
+  * @brief This function handles DMA1 stream3 global interrupt.
   */
-void USART1_IRQHandler(void)
+void DMA1_Stream3_IRQHandler(void)
 {
-  /* USER CODE BEGIN USART1_IRQn 0 */
-	if(__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE) != RESET)  // 空闲中断标记被置位
-	{
-	    __HAL_UART_CLEAR_IDLEFLAG(&huart1);  // 清楚中断标记
-	    HAL_UART_DMAStop(&huart1);           // 停止DMA接收
-	    UART1_RX_STA = UART1_RX_LEN - __HAL_DMA_GET_COUNTER(huart1.hdmarx);  // 总数据量减去未接收到的数据量为已经接收到的数据量
-	    UART1_RX_BUF[UART1_RX_STA] = 0;  // 添加结束符
-			memcpy(UART1_RX_Second_BUF, UART1_RX_BUF, UART1_RX_LEN);
-			memset(UART1_RX_BUF, 0, sizeof(UART1_RX_BUF)); 
-			//使用缓存区
-			//解包(测试)
-			
+  /* USER CODE BEGIN DMA1_Stream3_IRQn 0 */
 
-			//
-	    UART1_RX_STA |= 0X8000;         // 标记接收结束
-	    HAL_UART_Receive_DMA(&huart1, UART1_RX_BUF, UART1_RX_LEN);  // 重新启动DMA接收
-	}
-  /* USER CODE END USART1_IRQn 0 */
-  HAL_UART_IRQHandler(&huart1);
-  /* USER CODE BEGIN USART1_IRQn 1 */
+  /* USER CODE END DMA1_Stream3_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_uart7_rx);
+  /* USER CODE BEGIN DMA1_Stream3_IRQn 1 */
 
-  /* USER CODE END USART1_IRQn 1 */
+  /* USER CODE END DMA1_Stream3_IRQn 1 */
+}
+
+/**
+  * @brief This function handles DMA1 stream4 global interrupt.
+  */
+void DMA1_Stream4_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Stream4_IRQn 0 */
+
+  /* USER CODE END DMA1_Stream4_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_uart8_rx);
+  /* USER CODE BEGIN DMA1_Stream4_IRQn 1 */
+
+  /* USER CODE END DMA1_Stream4_IRQn 1 */
+}
+
+/**
+  * @brief This function handles FDCAN1 interrupt 0.
+  */
+void FDCAN1_IT0_IRQHandler(void)
+{
+  /* USER CODE BEGIN FDCAN1_IT0_IRQn 0 */
+
+  /* USER CODE END FDCAN1_IT0_IRQn 0 */
+  HAL_FDCAN_IRQHandler(&hfdcan1);
+  /* USER CODE BEGIN FDCAN1_IT0_IRQn 1 */
+
+  /* USER CODE END FDCAN1_IT0_IRQn 1 */
+}
+
+/**
+  * @brief This function handles FDCAN2 interrupt 0.
+  */
+void FDCAN2_IT0_IRQHandler(void)
+{
+  /* USER CODE BEGIN FDCAN2_IT0_IRQn 0 */
+
+  /* USER CODE END FDCAN2_IT0_IRQn 0 */
+  HAL_FDCAN_IRQHandler(&hfdcan2);
+  /* USER CODE BEGIN FDCAN2_IT0_IRQn 1 */
+
+  /* USER CODE END FDCAN2_IT0_IRQn 1 */
+}
+
+/**
+  * @brief This function handles FDCAN1 interrupt 1.
+  */
+void FDCAN1_IT1_IRQHandler(void)
+{
+  /* USER CODE BEGIN FDCAN1_IT1_IRQn 0 */
+
+  /* USER CODE END FDCAN1_IT1_IRQn 0 */
+  HAL_FDCAN_IRQHandler(&hfdcan1);
+  /* USER CODE BEGIN FDCAN1_IT1_IRQn 1 */
+
+  /* USER CODE END FDCAN1_IT1_IRQn 1 */
+}
+
+/**
+  * @brief This function handles FDCAN2 interrupt 1.
+  */
+void FDCAN2_IT1_IRQHandler(void)
+{
+  /* USER CODE BEGIN FDCAN2_IT1_IRQn 0 */
+
+  /* USER CODE END FDCAN2_IT1_IRQn 0 */
+  HAL_FDCAN_IRQHandler(&hfdcan2);
+  /* USER CODE BEGIN FDCAN2_IT1_IRQn 1 */
+
+  /* USER CODE END FDCAN2_IT1_IRQn 1 */
 }
 
 /**
@@ -287,6 +363,128 @@ void TIM7_IRQHandler(void)
   /* USER CODE BEGIN TIM7_IRQn 1 */
 
   /* USER CODE END TIM7_IRQn 1 */
+}
+
+/**
+  * @brief This function handles UART7 global interrupt.
+  */
+void UART7_IRQHandler(void)
+{
+  /* USER CODE BEGIN UART7_IRQn 0 */
+	if(__HAL_UART_GET_FLAG(&huart7, UART_FLAG_IDLE) != RESET)  // 空闲中断标记被置位
+	{
+	    __HAL_UART_CLEAR_IDLEFLAG(&huart7);  // 清楚中断标记
+	    HAL_UART_DMAStop(&huart7);           // 停止DMA接收
+	    UART7_RX_STA = UART7_RX_LEN - __HAL_DMA_GET_COUNTER(huart7.hdmarx);  // 总数据量减去未接收到的数据量为已经接收到的数据量
+	    UART7_RX_BUF[UART7_RX_STA] = 0;  // 添加结束符
+			memcpy(UART7_RX_Second_BUF, UART7_RX_BUF, UART7_RX_LEN);
+			memset(UART7_RX_BUF, 0, sizeof(UART7_RX_BUF)); 
+			//使用缓存区
+			//解包(测试)
+
+
+			//
+	    UART7_RX_STA |= 0X8000;         // 标记接收结束
+	    HAL_UART_Receive_DMA(&huart7, UART7_RX_BUF, UART7_RX_LEN);  // 重新启动DMA接收
+	}
+  /* USER CODE END UART7_IRQn 0 */
+  HAL_UART_IRQHandler(&huart7);
+  /* USER CODE BEGIN UART7_IRQn 1 */
+
+  /* USER CODE END UART7_IRQn 1 */
+}
+
+/**
+  * @brief This function handles UART8 global interrupt.
+  */
+void UART8_IRQHandler(void)
+{
+  /* USER CODE BEGIN UART8_IRQn 0 */
+	if(__HAL_UART_GET_FLAG(&huart8, UART_FLAG_IDLE) != RESET)  // 空闲中断标记被置位
+	{
+	    __HAL_UART_CLEAR_IDLEFLAG(&huart8);  // 清楚中断标记
+	    HAL_UART_DMAStop(&huart8);           // 停止DMA接收
+	    UART8_RX_STA = UART8_RX_LEN - __HAL_DMA_GET_COUNTER(huart8.hdmarx);  // 总数据量减去未接收到的数据量为已经接收到的数据量
+	    UART8_RX_BUF[UART8_RX_STA] = 0;  // 添加结束符
+			memcpy(UART8_RX_Second_BUF, UART8_RX_BUF, UART8_RX_LEN);
+			memset(UART8_RX_BUF, 0, sizeof(UART8_RX_BUF)); 
+			//使用缓存区
+			//解包(测试)
+
+			//
+	    UART8_RX_STA |= 0X8000;         // 标记接收结束
+	    HAL_UART_Receive_DMA(&huart8, UART8_RX_BUF, UART8_RX_LEN);  // 重新启动DMA接收
+	}
+  /* USER CODE END UART8_IRQn 0 */
+  HAL_UART_IRQHandler(&huart8);
+  /* USER CODE BEGIN UART8_IRQn 1 */
+
+  /* USER CODE END UART8_IRQn 1 */
+}
+
+/**
+  * @brief This function handles UART9 global interrupt.
+  */
+void UART9_IRQHandler(void)
+{
+  /* USER CODE BEGIN UART9_IRQn 0 */
+	if(__HAL_UART_GET_FLAG(&huart9, UART_FLAG_IDLE) != RESET)  // 空闲中断标记被置位
+	{
+	    __HAL_UART_CLEAR_IDLEFLAG(&huart9);  // 清楚中断标记
+	    HAL_UART_DMAStop(&huart9);           // 停止DMA接收
+	    UART9_RX_STA = UART9_RX_LEN - __HAL_DMA_GET_COUNTER(huart9.hdmarx);  // 总数据量减去未接收到的数据量为已经接收到的数据量
+		UART9_RX_BUF[UART9_RX_STA] = 0;  // 添加结束符
+			
+		if(UART9_flag==0)
+		{
+			memcpy(UART9_RX_Second_BUF, UART9_RX_BUF, UART9_RX_LEN);
+		}
+			
+			
+			memset(UART9_RX_BUF, 0, sizeof(UART9_RX_BUF)); 
+			//使用缓存区
+			//解包(测试)
+
+
+			//
+	    UART9_RX_STA |= 0X8000;         // 标记接收结束
+	    HAL_UART_Receive_DMA(&huart9, UART9_RX_BUF, UART9_RX_LEN);  // 重新启动DMA接收
+	}
+  /* USER CODE END UART9_IRQn 0 */
+  HAL_UART_IRQHandler(&huart9);
+  /* USER CODE BEGIN UART9_IRQn 1 */
+
+  /* USER CODE END UART9_IRQn 1 */
+}
+
+/**
+  * @brief This function handles USART10 global interrupt.
+  */
+void USART10_IRQHandler(void)
+{
+  /* USER CODE BEGIN USART10_IRQn 0 */
+	if(__HAL_UART_GET_FLAG(&huart10, UART_FLAG_IDLE) != RESET)  // 空闲中断标记被置位
+	{
+	    __HAL_UART_CLEAR_IDLEFLAG(&huart10);  // 清楚中断标记
+	    HAL_UART_DMAStop(&huart10);           // 停止DMA接收
+	    UART10_RX_STA = UART10_RX_LEN - __HAL_DMA_GET_COUNTER(huart10.hdmarx);  // 总数据量减去未接收到的数据量为已经接收到的数据量
+	    UART10_RX_BUF[UART10_RX_STA] = 0;  // 添加结束符
+			memcpy(UART10_RX_Second_BUF, UART10_RX_BUF, UART10_RX_LEN);
+			memset(UART10_RX_BUF, 0, sizeof(UART10_RX_BUF)); 
+			//使用缓存区
+			//解包(测试)
+
+
+			//
+	    UART10_RX_STA |= 0X8000;         // 标记接收结束
+	    HAL_UART_Receive_DMA(&huart10, UART10_RX_BUF, UART10_RX_LEN);  // 重新启动DMA接收
+	}
+
+  /* USER CODE END USART10_IRQn 0 */
+  HAL_UART_IRQHandler(&huart10);
+  /* USER CODE BEGIN USART10_IRQn 1 */
+
+  /* USER CODE END USART10_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */

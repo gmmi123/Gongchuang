@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "usart.h"
 float InfiniteYaw(float Now_Yaw);
-int flag=0;//¼ÇÂ¼Æ«º½½ÇÍ»±ä´ÎÊý
+
 float Last_Yaw;
 
 volatile float global_angle;
@@ -11,10 +11,7 @@ volatile float angular_velocity_y;
 volatile float angular_velocity_z;
 
 
-
-
-IMU_Typedef IMU;
-
+IMUHWT101_Typedef IMUHWT101;
 
 //²ÎÊý£ºÊý×édata£¬»º´æÇø´óÐ¡length
 void ParseAndPrintData(uint8_t* data, uint16_t length)//½âÊÍÍÓÂÝÒÇÊý¾Ý°ü
@@ -56,17 +53,17 @@ void ParseAndPrintData(uint8_t* data, uint16_t length)//½âÊÍÍÓÂÝÒÇÊý¾Ý°ü
         }
     }
 	
-	IMU.YawAngle=global_angle;
-	IMU.angular_velocity_y=angular_velocity_y;
-	IMU.angular_velocity_z=angular_velocity_z;
-	IMU.Full_YawAngle=InfiniteYaw(global_angle);
+	IMUHWT101.YawAngle=global_angle;
+	IMUHWT101.angular_velocity_y=angular_velocity_y;
+	IMUHWT101.angular_velocity_z=angular_velocity_z;
+//IMU.Full_YawAngle=InfiniteYaw(global_angle);
 }
 
 void ResetHWT101(void)
 {
 	uint8_t temp[]={0xff,0xAA,0X76,0x00,0x00};
 	HAL_UART_Transmit(&IMU_Uart, temp, 5,0xffff);
-	flag=0;
+//	flag=0;
 	Last_Yaw=0;
 }
  
@@ -79,19 +76,4 @@ uint8_t CalculateChecksum(uint8_t *data, uint16_t length) //Êý×éÍ·+µ½Ð£ÑéÎ»Ç°µÄ³
     return checksum;
 }
 
-float InfiniteYaw(float Now_Yaw)
-{
-	
-	if(Now_Yaw-Last_Yaw<-180)//Èç¹û´æÔÚ½Ç¶ÈÍ»±ä
-	{
-		flag++;
-	}
-	else if(Now_Yaw-Last_Yaw>180)
-	{
-		flag--;
-	}
- 
-    Last_Yaw = Now_Yaw;
-    return Now_Yaw+ flag*360;
-}
 

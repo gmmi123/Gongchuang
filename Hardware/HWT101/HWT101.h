@@ -3,7 +3,7 @@
 
 #include "main.h"
 
-#define IMU_Uart huart1			//陀螺仪串口
+#define IMU_Uart huart10			//陀螺仪串口
 
 typedef struct
 {
@@ -11,10 +11,16 @@ typedef struct
 	float angular_velocity_y;
 	float angular_velocity_z;
 	float Full_YawAngle;				//完全偏航角
+	float ax;
+	float ay;
+	float az;
+	float gx;
+	float gy;
+	float gz;
 }
-IMU_Typedef;
+IMUHWT101_Typedef;
 
-extern IMU_Typedef IMU;
+extern IMUHWT101_Typedef IMUHWT101;
 
 uint8_t CalculateChecksum(uint8_t *data, uint16_t length);//和校验
 void ParseAndPrintData(uint8_t *data, uint16_t length);//解包函数

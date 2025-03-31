@@ -27,12 +27,44 @@ gongchuang/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
   ..\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_i2c_ex.h \
   ..\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_pwr.h \
   ..\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_pwr_ex.h \
+  ..\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_spi.h \
+  ..\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_spi_ex.h \
   ..\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_tim.h \
   ..\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_tim_ex.h \
   ..\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart.h \
   ..\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart_ex.h \
   ..\Core\Inc\adc.h ..\Core\Inc\dma.h ..\Core\Inc\fdcan.h \
-  ..\Core\Inc\tim.h ..\Core\Inc\usart.h ..\Core\Inc\gpio.h \
-  ..\Hardware\PowerWarning\PowerWarning.h ..\Hardware\HWT101\HWT101.h \
+  ..\Core\Inc\spi.h ..\Core\Inc\tim.h ..\Core\Inc\usart.h \
+  ..\Core\Inc\gpio.h ..\Hardware\PowerWarning\PowerWarning.h \
   ..\Task\Hardware_Task.h ..\Task\Task_Management.h \
-  ..\Hardware\bsp_fdcan\bsp_fdcan.h
+  ..\Hardware\bsp_fdcan\bsp_fdcan.h ..\Hardware\Motor_can\dm4310_drv.h \
+  ..\Hardware\Motor_can\Motor_can.h \
+  ..\Hardware\BMI088\inc\BMI088driver.h \
+  ..\Hardware\BMI088\inc\BMI088reg.h \
+  ..\Hardware\BMI088\inc\BMI088Middleware.h \
+  ..\Hardware\MahonyAHRS\MahonyAHRS.h ..\Mylib\MyClaw.h \
+  ..\Mylib\MyCarControl.h ..\Mylib\MyIMU.h ..\Hardware\IMU.h \
+  ..\Mylib\MyMahonyAHRS.h \
+  C:\Users\27991\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.15.0\Include\dsp\fast_math_functions.h \
+  C:\Users\27991\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.15.0\Include\arm_math_types.h \
+  ..\Drivers\CMSIS\Include\cmsis_compiler.h \
+  C:\Users\27991\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.15.0\Include\arm_math_memory.h \
+  C:\Users\27991\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.15.0\Include\dsp\none.h \
+  C:\Users\27991\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.15.0\Include\dsp\utils.h \
+  C:\Users\27991\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.15.0\Include\dsp\basic_math_functions.h \
+  C:\Users\27991\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.15.0\Include\arm_math.h \
+  C:\Users\27991\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.15.0\Include\dsp\interpolation_functions.h \
+  C:\Users\27991\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.15.0\Include\dsp\bayes_functions.h \
+  C:\Users\27991\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.15.0\Include\dsp\statistics_functions.h \
+  C:\Users\27991\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.15.0\Include\dsp\matrix_functions.h \
+  C:\Users\27991\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.15.0\Include\dsp\complex_math_functions.h \
+  C:\Users\27991\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.15.0\Include\dsp\controller_functions.h \
+  C:\Users\27991\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.15.0\Include\dsp\support_functions.h \
+  C:\Users\27991\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.15.0\Include\dsp\distance_functions.h \
+  C:\Users\27991\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.15.0\Include\dsp\svm_functions.h \
+  C:\Users\27991\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.15.0\Include\dsp\svm_defines.h \
+  C:\Users\27991\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.15.0\Include\dsp\transform_functions.h \
+  C:\Users\27991\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.15.0\Include\dsp\filtering_functions.h \
+  C:\Users\27991\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.15.0\Include\dsp\quaternion_math_functions.h \
+  C:\Users\27991\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.15.0\Include\dsp\window_functions.h \
+  ..\Mylib\MyLift.h ..\Mylib\MyTurnPlate.h ..\Mylib\MyArm.h

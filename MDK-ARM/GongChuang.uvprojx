@@ -341,7 +341,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32H723xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../Hardware/Buzzer;../Hardware/PowerWarning;../Hardware/HWT101;../Task;../Hardware;../Hardware/bsp_fdcan</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../Hardware/Buzzer;../Hardware/PowerWarning;../Task;../Hardware;../Hardware/bsp_fdcan;../Hardware/Motor42;../Hardware/Motor_can;../Hardware/BMI088/inc;../Hardware/MahonyAHRS;../Hardware/Xianweikaiguan;../App;../Hardware/Sever_control;../Hardware/UsartDate;../Mylib;..\Hardware\HWT101</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -470,6 +470,62 @@
               <FileName>fdcan.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Core/Src/fdcan.c</FilePath>
+              <FileOption>
+                <CommonProperty>
+                  <UseCPPCompiler>2</UseCPPCompiler>
+                  <RVCTCodeConst>0</RVCTCodeConst>
+                  <RVCTZI>0</RVCTZI>
+                  <RVCTOtherData>0</RVCTOtherData>
+                  <ModuleSelection>0</ModuleSelection>
+                  <IncludeInBuild>1</IncludeInBuild>
+                  <AlwaysBuild>2</AlwaysBuild>
+                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
+                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
+                  <PublicsOnly>2</PublicsOnly>
+                  <StopOnExitCode>11</StopOnExitCode>
+                  <CustomArgument></CustomArgument>
+                  <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
+                </CommonProperty>
+                <FileArmAds>
+                  <Cads>
+                    <interw>2</interw>
+                    <Optim>0</Optim>
+                    <oTime>2</oTime>
+                    <SplitLS>2</SplitLS>
+                    <OneElfS>2</OneElfS>
+                    <Strict>2</Strict>
+                    <EnumInt>2</EnumInt>
+                    <PlainCh>2</PlainCh>
+                    <Ropi>2</Ropi>
+                    <Rwpi>2</Rwpi>
+                    <wLevel>0</wLevel>
+                    <uThumb>2</uThumb>
+                    <uSurpInc>2</uSurpInc>
+                    <uC99>2</uC99>
+                    <uGnu>2</uGnu>
+                    <useXO>2</useXO>
+                    <v6Lang>0</v6Lang>
+                    <v6LangP>0</v6LangP>
+                    <vShortEn>2</vShortEn>
+                    <vShortWch>2</vShortWch>
+                    <v6Lto>2</v6Lto>
+                    <v6WtE>2</v6WtE>
+                    <v6Rtti>2</v6Rtti>
+                    <VariousControls>
+                      <MiscControls></MiscControls>
+                      <Define></Define>
+                      <Undefine></Undefine>
+                      <IncludePath></IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+            <File>
+              <FileName>spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/spi.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -898,6 +954,118 @@
               </FileOption>
             </File>
             <File>
+              <FileName>stm32h7xx_hal_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_spi.c</FilePath>
+              <FileOption>
+                <CommonProperty>
+                  <UseCPPCompiler>2</UseCPPCompiler>
+                  <RVCTCodeConst>0</RVCTCodeConst>
+                  <RVCTZI>0</RVCTZI>
+                  <RVCTOtherData>0</RVCTOtherData>
+                  <ModuleSelection>0</ModuleSelection>
+                  <IncludeInBuild>1</IncludeInBuild>
+                  <AlwaysBuild>2</AlwaysBuild>
+                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
+                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
+                  <PublicsOnly>2</PublicsOnly>
+                  <StopOnExitCode>11</StopOnExitCode>
+                  <CustomArgument></CustomArgument>
+                  <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
+                </CommonProperty>
+                <FileArmAds>
+                  <Cads>
+                    <interw>2</interw>
+                    <Optim>0</Optim>
+                    <oTime>2</oTime>
+                    <SplitLS>2</SplitLS>
+                    <OneElfS>2</OneElfS>
+                    <Strict>2</Strict>
+                    <EnumInt>2</EnumInt>
+                    <PlainCh>2</PlainCh>
+                    <Ropi>2</Ropi>
+                    <Rwpi>2</Rwpi>
+                    <wLevel>0</wLevel>
+                    <uThumb>2</uThumb>
+                    <uSurpInc>2</uSurpInc>
+                    <uC99>2</uC99>
+                    <uGnu>2</uGnu>
+                    <useXO>2</useXO>
+                    <v6Lang>0</v6Lang>
+                    <v6LangP>0</v6LangP>
+                    <vShortEn>2</vShortEn>
+                    <vShortWch>2</vShortWch>
+                    <v6Lto>2</v6Lto>
+                    <v6WtE>2</v6WtE>
+                    <v6Rtti>2</v6Rtti>
+                    <VariousControls>
+                      <MiscControls></MiscControls>
+                      <Define></Define>
+                      <Undefine></Undefine>
+                      <IncludePath></IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_spi_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_spi_ex.c</FilePath>
+              <FileOption>
+                <CommonProperty>
+                  <UseCPPCompiler>2</UseCPPCompiler>
+                  <RVCTCodeConst>0</RVCTCodeConst>
+                  <RVCTZI>0</RVCTZI>
+                  <RVCTOtherData>0</RVCTOtherData>
+                  <ModuleSelection>0</ModuleSelection>
+                  <IncludeInBuild>1</IncludeInBuild>
+                  <AlwaysBuild>2</AlwaysBuild>
+                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
+                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
+                  <PublicsOnly>2</PublicsOnly>
+                  <StopOnExitCode>11</StopOnExitCode>
+                  <CustomArgument></CustomArgument>
+                  <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
+                </CommonProperty>
+                <FileArmAds>
+                  <Cads>
+                    <interw>2</interw>
+                    <Optim>0</Optim>
+                    <oTime>2</oTime>
+                    <SplitLS>2</SplitLS>
+                    <OneElfS>2</OneElfS>
+                    <Strict>2</Strict>
+                    <EnumInt>2</EnumInt>
+                    <PlainCh>2</PlainCh>
+                    <Ropi>2</Ropi>
+                    <Rwpi>2</Rwpi>
+                    <wLevel>0</wLevel>
+                    <uThumb>2</uThumb>
+                    <uSurpInc>2</uSurpInc>
+                    <uC99>2</uC99>
+                    <uGnu>2</uGnu>
+                    <useXO>2</useXO>
+                    <v6Lang>0</v6Lang>
+                    <v6LangP>0</v6LangP>
+                    <vShortEn>2</vShortEn>
+                    <vShortWch>2</vShortWch>
+                    <v6Lto>2</v6Lto>
+                    <v6WtE>2</v6WtE>
+                    <v6Rtti>2</v6Rtti>
+                    <VariousControls>
+                      <MiscControls></MiscControls>
+                      <Define></Define>
+                      <Undefine></Undefine>
+                      <IncludePath></IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+            <File>
               <FileName>stm32h7xx_hal_tim.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim.c</FilePath>
@@ -1055,16 +1223,6 @@
               <FilePath>..\Hardware\PowerWarning\PowerWarning.h</FilePath>
             </File>
             <File>
-              <FileName>HWT101.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Hardware\HWT101\HWT101.c</FilePath>
-            </File>
-            <File>
-              <FileName>HWT101.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Hardware\HWT101\HWT101.h</FilePath>
-            </File>
-            <File>
               <FileName>Interrupt.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Hardware\Interrupt.c</FilePath>
@@ -1083,6 +1241,96 @@
               <FileName>bsp_fdcan.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\Hardware\bsp_fdcan\bsp_fdcan.h</FilePath>
+            </File>
+            <File>
+              <FileName>Motor_can.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\Motor_can\Motor_can.c</FilePath>
+            </File>
+            <File>
+              <FileName>Motor_can.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Hardware\Motor_can\Motor_can.h</FilePath>
+            </File>
+            <File>
+              <FileName>dm4310_drv.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Hardware\Motor_can\dm4310_drv.h</FilePath>
+            </File>
+            <File>
+              <FileName>dm4310_drv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\Motor_can\dm4310_drv.c</FilePath>
+            </File>
+            <File>
+              <FileName>PID.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\PID.c</FilePath>
+            </File>
+            <File>
+              <FileName>PID.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Hardware\PID.h</FilePath>
+            </File>
+            <File>
+              <FileName>BMI088driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\BMI088\BMI088driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>BMI088Middleware.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\BMI088\BMI088Middleware.c</FilePath>
+            </File>
+            <File>
+              <FileName>MahonyAHRS.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\MahonyAHRS\MahonyAHRS.c</FilePath>
+            </File>
+            <File>
+              <FileName>MahonyAHRS.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Hardware\MahonyAHRS\MahonyAHRS.h</FilePath>
+            </File>
+            <File>
+              <FileName>IMU.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\IMU.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMU.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Hardware\IMU.h</FilePath>
+            </File>
+            <File>
+              <FileName>Xianweikaiguan.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\Xianweikaiguan\Xianweikaiguan.c</FilePath>
+            </File>
+            <File>
+              <FileName>Xianweikaiguan.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Hardware\Xianweikaiguan\Xianweikaiguan.h</FilePath>
+            </File>
+            <File>
+              <FileName>UsartDate.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\UsartDate\UsartDate.c</FilePath>
+            </File>
+            <File>
+              <FileName>UsartDate.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Hardware\UsartDate\UsartDate.h</FilePath>
+            </File>
+            <File>
+              <FileName>HWT101.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Gongchuang\GongChuang_2.0new\GongChuang_2.0new\Hardware\HWT101\HWT101.c</FilePath>
+            </File>
+            <File>
+              <FileName>HWT101.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\Gongchuang\GongChuang_2.0new\GongChuang_2.0new\Hardware\HWT101\HWT101.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1112,6 +1360,166 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>App</GroupName>
+          <Files>
+            <File>
+              <FileName>test.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\test.txt</FilePath>
+            </File>
+            <File>
+              <FileName>MyGrabBlock.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\App\MyGrabBlock.h</FilePath>
+            </File>
+            <File>
+              <FileName>MyGrabBlock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\MyGrabBlock.c</FilePath>
+            </File>
+            <File>
+              <FileName>MyDebug.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\MyDebug.c</FilePath>
+            </File>
+            <File>
+              <FileName>MyDebug.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\App\MyDebug.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Mylib</GroupName>
+          <Files>
+            <File>
+              <FileName>MyCarControl.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Mylib\MyCarControl.c</FilePath>
+            </File>
+            <File>
+              <FileName>MyCarControl.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Mylib\MyCarControl.h</FilePath>
+            </File>
+            <File>
+              <FileName>MyClaw.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Mylib\MyClaw.c</FilePath>
+            </File>
+            <File>
+              <FileName>MyClaw.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Mylib\MyClaw.h</FilePath>
+            </File>
+            <File>
+              <FileName>MyIMU.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Mylib\MyIMU.c</FilePath>
+            </File>
+            <File>
+              <FileName>MyIMU.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Mylib\MyIMU.h</FilePath>
+            </File>
+            <File>
+              <FileName>MyMahonyAHRS.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Mylib\MyMahonyAHRS.c</FilePath>
+            </File>
+            <File>
+              <FileName>MyMahonyAHRS.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Mylib\MyMahonyAHRS.h</FilePath>
+            </File>
+            <File>
+              <FileName>MyRaspberryPi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Mylib\MyRaspberryPi.c</FilePath>
+            </File>
+            <File>
+              <FileName>MyRaspberryPi.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Mylib\MyRaspberryPi.h</FilePath>
+            </File>
+            <File>
+              <FileName>MySerialScreen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Mylib\MySerialScreen.c</FilePath>
+            </File>
+            <File>
+              <FileName>MySerialScreen.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Mylib\MySerialScreen.h</FilePath>
+            </File>
+            <File>
+              <FileName>MyMainWhile.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Mylib\MyMainWhile.c</FilePath>
+            </File>
+            <File>
+              <FileName>MyLift.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Mylib\MyLift.c</FilePath>
+            </File>
+            <File>
+              <FileName>MyLift.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Mylib\MyLift.h</FilePath>
+            </File>
+            <File>
+              <FileName>MyTurnPlate.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Mylib\MyTurnPlate.c</FilePath>
+            </File>
+            <File>
+              <FileName>MyTurnPlate.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Mylib\MyTurnPlate.h</FilePath>
+            </File>
+            <File>
+              <FileName>MyMainWhile.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Mylib\MyMainWhile.h</FilePath>
+            </File>
+            <File>
+              <FileName>MyArm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Mylib\MyArm.c</FilePath>
+            </File>
+            <File>
+              <FileName>MyArm.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Mylib\MyArm.h</FilePath>
+            </File>
+            <File>
+              <FileName>MyTest.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Mylib\MyTest.c</FilePath>
+            </File>
+            <File>
+              <FileName>MyTest.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Mylib\MyTest.h</FilePath>
+            </File>
+            <File>
+              <FileName>MyTrace.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Mylib\MyTrace.c</FilePath>
+            </File>
+            <File>
+              <FileName>MyTrace.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Mylib\MyTrace.h</FilePath>
+            </File>
+            <File>
+              <FileName>MyLib.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Mylib\MyLib.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>
@@ -1123,6 +1531,12 @@
     <components>
       <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="6.1.0" condition="ARMv6_7_8-M Device">
         <package name="CMSIS" schemaVersion="1.7.36" url="https://www.keil.com/pack/" vendor="ARM" version="6.1.0"/>
+        <targetInfos>
+          <targetInfo name="GongChuang"/>
+        </targetInfos>
+      </component>
+      <component Cclass="CMSIS" Cgroup="DSP" Cvariant="Source" Cvendor="ARM" Cversion="1.15.0" condition="CMSISCORE">
+        <package name="CMSIS-DSP" schemaVersion="1.7.7" url="https://www.keil.com/pack/" vendor="ARM" version="1.15.0"/>
         <targetInfos>
           <targetInfo name="GongChuang"/>
         </targetInfos>

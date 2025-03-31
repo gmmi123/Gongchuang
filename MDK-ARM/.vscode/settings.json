@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "pid.h": "c",
+        "main.h": "c",
+        "control.h": "c",
+        "cstddef": "c",
+        "limits": "c",
+        "type_traits": "c",
+        "motor_can.h": "c",
+        "dm4310_drv.h": "c"
+    }
+}
